@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
 
+
 class CatalogPage(Base):
 
     def __init__(self, driver):
@@ -12,12 +13,11 @@ class CatalogPage(Base):
     # Locators
     category_link = "(//a[@href='/refrigerator/two_chambered_refrigerators/'])[2]"
     max_price_input = "//input[@id='max_txt_price']"
-    type_tag = "//a[@href='refrigerator/two_chambered_refrigerators/tags/color_bejevie/']"
+    type_tag = "//a[@href='/refrigerator/two_chambered_refrigerators/tags/color_bejevie/']"
     model_checkbox = "//input[@alias='haier']"
     country_checkbox = "//input[@alias='2138']"
     apply_button = "//input[@id='cfilter_btnsubmit']"
     item_link = "//input[@href='/refrigerator/two_chambered_refrigerators/haier/c4f640ccgu1/']"
-    close_banner = "//div[@class='ap-close']"
 
     # Getters
     def get_category_link(self):
@@ -36,7 +36,7 @@ class CatalogPage(Base):
         return WebDriverWait(self.driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, self.model_checkbox)))
 
-    def get_country_checkbox (self):
+    def get_country_checkbox(self):
         return WebDriverWait(self.driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, self.country_checkbox)))
 
@@ -58,6 +58,8 @@ class CatalogPage(Base):
         print("Opened a tag")
 
     def input_max_price(self):
+        self.get_max_price_input().click()
+        self.get_max_price_input().clear()
         self.get_max_price_input().send_keys('140000')
         print("Input max price")
 
@@ -73,18 +75,9 @@ class CatalogPage(Base):
         self.get_apply_button().click()
         print("Applied filters")
 
-    def click_close_banner(self):
-        self.get_close_banner().click()
-        print("Closed banner")
-
-
     # Methods
     def pick_an_item(self):
         self.click_category_link()
-        # try:
-        #     self.click_close_banner()
-        # except TimeoutError:
-        #
         self.click_type_tag()
         self.input_max_price()
         self.click_model_checkbox()

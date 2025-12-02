@@ -110,8 +110,8 @@ class MainPage(Base):
         #for now, before auth is fixed
         self.driver.get(self.url)
         self.driver.maximize_window()
-        body = self.driver.find_element("tag name", "body")
-        body.click() #to close a modal
+        # body = self.driver.find_element("tag name", "body")
+        # body.click() #to close a modal
         self.click_catalog_button()
         self.click_on_refrigerator()
         self.assert_url("https://www.holodilnik.ru/refrigerator/")
