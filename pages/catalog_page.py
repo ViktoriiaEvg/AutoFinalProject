@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -58,9 +60,9 @@ class CatalogPage(Base):
         print("Opened a tag")
 
     def input_max_price(self):
-        self.get_max_price_input().click()
-        self.get_max_price_input().clear()
-        self.get_max_price_input().send_keys('140000')
+        price_input = self.get_max_price_input()
+        price_input.clear()
+        price_input.send_keys('140000')
         print("Input max price")
 
     def click_model_checkbox(self):
