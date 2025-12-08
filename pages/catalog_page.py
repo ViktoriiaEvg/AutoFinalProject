@@ -1,4 +1,3 @@
-import time
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -13,75 +12,152 @@ class CatalogPage(Base):
         self.driver = driver
 
     # Locators
-    category_link = "(//a[@href='/refrigerator/two_chambered_refrigerators/'])[2]"
-    max_price_input = "//input[@id='max_txt_price']"
-    type_tag = "//a[@href='/refrigerator/two_chambered_refrigerators/tags/color_bejevie/']"
-    model_checkbox = "//input[@alias='haier']"
-    country_checkbox = "//input[@alias='2138']"
-    apply_button = "//input[@id='cfilter_btnsubmit']"
-    item_link = "//input[@href='/refrigerator/two_chambered_refrigerators/haier/c4f640ccgu1/']"
+
+    brand_filter = "//button[@data-group-id='-1']"
+    brand_checkbox = "//input[@id='369']"
+
+    age_filter = "//button[@data-group-id='2']"
+    age_checkbox = "//input[@id='783']"
+
+    ingredient_filter = "//button[@data-group-id='4']"
+    ingredient_checkbox = "//input[@id='808']"
+
+    price_filter = "//button[@data-group-id='-2']"
+    max_price_input = "//input[@name='field-max']"
+
+    size_filter = "//button[@data-group-id='3']"
+    size_checkbox = "//input[@id='787']"
+
+    type_filter = "//button[@data-group-id='6']"
+    type_checkbox = "//input[@id='865']"
+
+    confirm_button = "//button[@class='BaseButton_root__67Mgg Button_root__Z8ate Button_fullWidth__ad0Xe Button_gradientVariant__FpASN']"
+    reset_button = "//button[@class='BaseButton_root__67Mgg Button_root__Z8ate list-selected-filter_resetButton__5oJwH Button_textVariant__gub3S Button_preventAnimation__9Rvli']"
+
+    product_card = "/html/body/div[1]/main/div[5]/section/div[1]/span/a"
 
     # Getters
-    def get_category_link(self):
-        return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.category_link)))
 
-    def get_type_tag(self):
+    def get_brand_filter(self):
         return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.type_tag)))
+            EC.element_to_be_clickable((By.XPATH, self.brand_filter)))
+
+    def get_brand_checkbox(self):
+        return WebDriverWait(self.driver, 30).until(
+            EC.presence_of_element_located((By.XPATH, self.brand_checkbox)))
+
+    def get_age_filter(self):
+        return WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.XPATH, self.age_filter)))
+
+    def get_age_checkbox(self):
+        return WebDriverWait(self.driver, 30).until(
+            EC.presence_of_element_located((By.XPATH, self.age_checkbox)))
+
+    def get_ingredient_filter(self):
+        return WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.XPATH, self.ingredient_filter)))
+
+    def get_ingredient_checkbox(self):
+        return WebDriverWait(self.driver, 30).until(
+            EC.presence_of_element_located((By.XPATH, self.ingredient_checkbox)))
+
+    def get_price_filter(self):
+        return WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.XPATH, self.price_filter)))
 
     def get_max_price_input(self):
         return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.max_price_input)))
+            EC.presence_of_element_located((By.XPATH, self.max_price_input)))
 
-    def get_model_checkbox(self):
+    def get_size_filter(self):
         return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.model_checkbox)))
+            EC.element_to_be_clickable((By.XPATH, self.size_filter)))
 
-    def get_country_checkbox(self):
+    def get_size_checkbox(self):
         return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.country_checkbox)))
+            EC.presence_of_element_located((By.XPATH, self.size_checkbox)))
 
-    def get_apply_button(self):
+    def get_type_filter(self):
         return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.apply_button)))
+            EC.element_to_be_clickable((By.XPATH, self.type_filter)))
 
-    def get_close_banner(self):
+    def get_type_checkbox(self):
         return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.close_banner)))
+            EC.presence_of_element_located((By.XPATH, self.type_checkbox)))
+
+    def get_confirm_button(self):
+        return WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.XPATH, self.confirm_button)))
+
+    def get_reset_button(self):
+        return WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.XPATH, self.reset_button)))
+
+
+    def get_product_card(self):
+        return WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.XPATH, self.product_card)))
+
 
     # Actions
-    def click_category_link(self):
-        self.get_category_link().click()
-        print("Clicked category")
 
-    def click_type_tag(self):
-        self.get_type_tag().click()
-        print("Opened a tag")
+    def apply_brand_filter(self):
+        self.get_brand_filter().click()
+        self.get_brand_checkbox().click()
+        self.get_confirm_button().click()
+        print("Applied the brand filter")
 
-    def input_max_price(self):
-        price_input = self.get_max_price_input()
-        price_input.clear()
-        price_input.send_keys('140000')
-        print("Input max price")
+    def apply_age_filter(self):
+        self.get_age_filter().click()
+        self.get_age_checkbox().click()
+        self.get_confirm_button().click()
+        print("Applied age filter")
 
-    def click_model_checkbox(self):
-        self.get_model_checkbox().click()
-        print("Clicked on a model")
+    def apply_ingredient_filter(self):
+        self.get_ingredient_filter().click()
+        self.get_ingredient_checkbox().click()
+        self.get_confirm_button().click()
+        print("Applied ingredient filter")
 
-    def click_country_checkbox(self):
-        self.get_country_checkbox().click()
-        print("Clicked on a country")
+    def apply_price_filter(self):
+        self.get_price_filter().click()
+        max_price = self.get_max_price_input()
+        max_price.clear()
+        max_price.click()
+        max_price.send_keys("1500")
+        self.get_confirm_button().click()
+        print("Applied the price filter")
 
-    def click_apply_button(self):
-        self.get_apply_button().click()
-        print("Applied filters")
+    def apply_size_filter(self):
+        self.get_size_filter().click()
+        self.get_size_checkbox().click()
+        self.get_confirm_button().click()
+        print("Applied size filter")
+
+    def apply_type_filter(self):
+        self.get_type_filter().click()
+        self.get_type_checkbox().click()
+        self.get_confirm_button().click()
+        print("Applied type filter")
+
+    def click_product_card(self):
+        self.get_product_card().click()
+        print("Clicked on the product")
 
     # Methods
-    def pick_an_item(self):
-        self.click_category_link()
-        self.click_type_tag()
-        self.input_max_price()
-        self.click_model_checkbox()
-        self.click_country_checkbox()
-        self.click_apply_button()
+    def apply_filters(self):
+        self.get_current_url()
+        self.close_promo()
+        self.apply_brand_filter()
+        self.apply_age_filter()
+        self.apply_ingredient_filter()
+        self.apply_price_filter()
+        self.apply_size_filter()
+        self.apply_type_filter()
+        self.assert_text(self.get_reset_button(), "Сбросить фильтры")
+        print("Filters applied")
+
+    def open_product_page(self):
+        self.click_product_card()
+        self.get_current_url()

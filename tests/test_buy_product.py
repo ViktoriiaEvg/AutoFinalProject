@@ -7,17 +7,26 @@ from pages.cart_page import CartPage
 from pages.client_info_page import ClientInfoPage
 from pages.main_page import MainPage
 from pages.catalog_page import CatalogPage
+from pages.product_page import ProductPage
 
 
 def test_buy_product():
     driver = webdriver.Firefox()
 
     mp = MainPage(driver)
-    # mp.authorization()
     mp.open_catalog()
 
     cp = CatalogPage(driver)
-    cp.pick_an_item()
+    cp.apply_filters()
+    cp.open_product_page()
 
-    time.sleep(2)
+    pp = ProductPage(driver)
+    pp.add_product_to_cart()
+    pp.open_cart_page()
+
+    crtp = CartPage(driver)
+    crtp.increase_product_count()
+    crtp.product_confirmation()
+
+    time.sleep(5)
     driver.close()
