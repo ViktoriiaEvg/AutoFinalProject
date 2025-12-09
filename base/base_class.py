@@ -27,6 +27,7 @@ class Base:
 
     """ Method for text assertion"""
 
+
     def assert_text(self, text, result):
         value_text = text.text
         assert value_text == result

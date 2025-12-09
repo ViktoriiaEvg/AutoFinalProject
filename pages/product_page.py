@@ -1,5 +1,3 @@
-from pstats import add_callers
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -15,7 +13,7 @@ class ProductPage(Base):
     add_to_cart_button = "//button[text()='В корзину']"
     product_name = "//h1"
     cart_counter = "//span[@data-testid='cart-counter-count']"
-    open_cart_button = "//a[@title='Корзина']"
+    open_cart_button = "(//a[@href='/personal/cart/'])[3]"
 
     # Getters
     def get_add_to_cart_button(self):

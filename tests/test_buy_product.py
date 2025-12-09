@@ -28,5 +28,8 @@ def test_buy_product():
     crtp.increase_product_count()
     crtp.product_confirmation()
 
+    cip = ClientInfoPage(driver)
+    cip.input_information()
+
     time.sleep(5)
     driver.close()

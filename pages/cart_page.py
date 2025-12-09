@@ -1,3 +1,6 @@
+import time
+
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -26,9 +29,10 @@ class CartPage(Base):
             EC.element_to_be_clickable((By.XPATH, self.product_counter)))
 
     def get_checkout_button(self):
-        return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.checkout_button)))
-
+        element = WebDriverWait(self.driver, 30).until(
+            EC.presence_of_element_located((By.XPATH, self.checkout_button)))
+        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+        return element
 
 
     # Actions
@@ -38,15 +42,21 @@ class CartPage(Base):
         print("Clicked add more")
 
     def click_checkout(self):
-        self.get_checkout_button().click()
-        print("Clicked Checkout")
+        checkout_button = self.get_checkout_button()
+        time.sleep(3)
+        checkout_button.click()
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.title_is("Оформление заказа"))
+        print("Opened Checkout")
 
 
     # Methods
     def increase_product_count(self):
         self.click_add_product()
-        self.assert_text(self.get_product_counter().text,'2')
+        assert self.get_product_counter().get_attribute("value") == "2"
+        print("The product quantity is increased")
 
     def product_confirmation(self):
         self.get_current_url()
         self.click_checkout()
+        self.assert_url("https://www.petshop.ru/personal/order/make/")

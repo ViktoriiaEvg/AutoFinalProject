@@ -1,4 +1,4 @@
-
+from selenium.common import ElementClickInterceptedException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -148,8 +148,11 @@ class CatalogPage(Base):
     # Methods
     def apply_filters(self):
         self.get_current_url()
-        self.close_promo()
-        self.apply_brand_filter()
+        try:
+            self.apply_brand_filter()
+        except ElementClickInterceptedException:
+            self.close_promo()
+            self.apply_brand_filter()
         self.apply_age_filter()
         self.apply_ingredient_filter()
         self.apply_price_filter()
