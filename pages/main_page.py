@@ -27,7 +27,6 @@ class MainPage(Base):
         return WebDriverWait(self.driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, self.catalog_button)))
 
-
     def get_treats_button(self):
         return WebDriverWait(self.driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, self.treats_button)))

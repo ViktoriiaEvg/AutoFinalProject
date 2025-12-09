@@ -1,6 +1,5 @@
 import time
 
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -46,7 +45,7 @@ class CartPage(Base):
         time.sleep(3)
         checkout_button.click()
         wait = WebDriverWait(self.driver, 10)
-        wait.until(EC.title_is("Оформление заказа"))
+        wait.until(EC.title_is("Оформление заказа")) #Wainting for the next page to load
         print("Opened Checkout")
 
 

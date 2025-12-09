@@ -16,7 +16,7 @@ class Base:
         actions = ActionChains(self.driver)
         actions.move_by_offset(10, 10).click().perform()
         print("Clicked to close promo")
-        time.sleep(5)
+        time.sleep(5) #to wait for banner closing animation to finish
 
 
     """ Method for getting current URL"""
@@ -26,7 +26,6 @@ class Base:
         print("Current Url " + get_url)
 
     """ Method for text assertion"""
-
 
     def assert_text(self, text, result):
         value_text = text.text
